@@ -13,5 +13,11 @@ jobs:
       with:
         distribution: temurin
         java-version: 8
+    - name: Setup Scala
+      run: |
+        curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs && chmod +x cs && ./cs setup -y
+        echo ~/.local/share/coursier/bin >> $GITHUB_PATH
     - name: Build and Test
-      run: sbt -v +test
+      run: |
+        echo $PATH
+        sbt -v +test
